@@ -28,10 +28,13 @@ def synthetize_scenarios(
     ScenarioSynthetizer.synthetize(command.variables, uow)
 
 
-def synthetize_operation(
-    command: commands.SynthetizeOperation, uow: AbstractUnitOfWork
-):
-    OperationSynthetizer.synthetize(command.variables, uow)
+#def synthetize_operation(
+#    command: commands.SynthetizeOperation, uow: AbstractUnitOfWork
+#):
+#    OperationSynthetizer.synthetize(command.variables, uow)
+
+def synthetize_operation(  variables, uow: AbstractUnitOfWork):
+    OperationSynthetizer.synthetize(variables, uow)
 
 
 def synthetize_policy(
