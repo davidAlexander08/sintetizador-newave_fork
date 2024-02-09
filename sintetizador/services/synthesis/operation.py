@@ -802,7 +802,9 @@ class OperationSynthetizer:
         args: List[str],
     ) -> List[OperationSynthesis]:
         args_data = [OperationSynthesis.factory(c) for c in args]
+        print(args_data)
         valid_args = [arg for arg in args_data if arg is not None]
+        print(valid_args)
         return valid_args
 
     @classmethod
