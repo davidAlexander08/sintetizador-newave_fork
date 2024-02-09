@@ -850,44 +850,14 @@ class OperationSynthetizer:
             )
             cls.logger.info(f"Caso com modelagem híbrida: {indiv}")
         for v in variables:
-            if (
-                v.variable
-                in [
-                    Variable.VELOCIDADE_VENTO,
-                    Variable.GERACAO_EOLICA,
-                    Variable.CORTE_GERACAO_EOLICA,
-                ]
-                and not eolica
-            ):
-                continue
-            if (
-                v.spatial_resolution == SpatialResolution.USINA_HIDROELETRICA
-                and not indiv
-            ):
-                continue
-            if (
-                v.variable
-                in [
-                    Variable.VIOLACAO_DEFLUENCIA_MAXIMA,
-                    Variable.VIOLACAO_DEFLUENCIA_MINIMA,
-                    Variable.VIOLACAO_FPHA,
-                    Variable.VIOLACAO_TURBINAMENTO_MAXIMO,
-                    Variable.VIOLACAO_TURBINAMENTO_MINIMO,
-                    Variable.VOLUME_ARMAZENADO_ABSOLUTO_INICIAL,
-                    Variable.VOLUME_ARMAZENADO_ABSOLUTO_FINAL,
-                ]
-                and not indiv
-            ):
-                continue
-            if all(
-                [
-                    v.variable == Variable.VALOR_AGUA,
-                    v.spatial_resolution
-                    == SpatialResolution.USINA_HIDROELETRICA,
-                    not indiv,
-                ]
-            ):
-                continue
+           # if ( v.variable  in [  Variable.VELOCIDADE_VENTO,  Variable.GERACAO_EOLICA,  Variable.CORTE_GERACAO_EOLICA,   ]    and not eolica   ):
+           #     continue
+           # if (  v.spatial_resolution == SpatialResolution.USINA_HIDROELETRICA     and not indiv  ):
+           #     continue
+           # if (  v.variable    in [   Variable.VIOLACAO_DEFLUENCIA_MAXIMA, Variable.VIOLACAO_DEFLUENCIA_MINIMA, Variable.VIOLACAO_FPHA, Variable.VIOLACAO_TURBINAMENTO_MAXIMO, Variable.VIOLACAO_TURBINAMENTO_MINIMO, Variable.VOLUME_ARMAZENADO_ABSOLUTO_INICIAL,  Variable.VOLUME_ARMAZENADO_ABSOLUTO_FINAL     ]  and not indiv     ):
+           #     continue
+           # if all(  [  v.variable == Variable.VALOR_AGUA,     v.spatial_resolution  == SpatialResolution.USINA_HIDROELETRICA,     not indiv,    ]   ):
+           #     continue
             valid_variables.append(v)
         if cls.logger is not None:
             cls.logger.info(f"Variáveis: {valid_variables}")
@@ -1519,16 +1489,20 @@ class OperationSynthetizer:
             pd.DataFrame,
             "submercados",
         )
+        print(sistema)
         confhd = cls._validate_data(
             cls._get_confhd(uow).usinas, pd.DataFrame, "UHEs"
         )
+        print(confhd)
         rees = cls._validate_data(cls._get_ree(uow).rees, pd.DataFrame, "REEs")
-
+        print(rees)
         rees_usinas = confhd["ree"].unique().tolist()
+        print(rees_usinas)
         nomes_rees = {
             r: str(rees.loc[rees["codigo"] == r, "nome"].tolist()[0])
             for r in rees_usinas
         }
+        print(nomes_rees)
         rees_submercados = {
             r: str(
                 sistema.loc[
@@ -2352,9 +2326,7 @@ class OperationSynthetizer:
         ):
             df = cls.__stub_resolve_volumes_iniciais_uhe(s, uow)
             return df, True
-        elif all(
-            [
-                s.variable
+        elif all(  [   s.variable
                 in [
                     Variable.VOLUME_ARMAZENADO_ABSOLUTO_INICIAL,
                     Variable.VOLUME_ARMAZENADO_ABSOLUTO_FINAL,
@@ -2377,10 +2349,7 @@ class OperationSynthetizer:
                     Variable.VAZAO_TURBINADA,
                     Variable.VAZAO_RETIRADA,
                     Variable.VAZAO_DESVIADA,
-                ],
-                s.spatial_resolution != SpatialResolution.USINA_HIDROELETRICA,
-            ]
-        ):
+                ],  s.spatial_resolution != SpatialResolution.USINA_HIDROELETRICA    ] ):
             df = cls.__stub_agrega_variaveis_indiv_REE_SBM_SIN(s, uow)
             return df, True
         elif s.variable in [Variable.ENERGIA_DEFLUENCIA_MINIMA]:
@@ -2412,9 +2381,7 @@ class OperationSynthetizer:
             synthesis_variables = (
                 OperationSynthetizer._process_variable_arguments(variables)
             )
-        valid_synthesis = OperationSynthetizer.filter_valid_variables(
-            synthesis_variables, uow
-        )
+        valid_synthesis = OperationSynthetizer.filter_valid_variables( synthesis_variables, uow     ) ## Faz consistência para caso o usuário coloque alguma sinteze não válida
 
         for s in valid_synthesis:
             try:
