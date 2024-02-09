@@ -144,6 +144,8 @@ def operacao(variaveis, formato, processadores):
     logger.info("# Realizando síntese da OPERACAO #")
 
     uow = factory("FS", os.curdir, q)
+    #command = commands.SynthetizeOperation(variaveis)
+    #handlers.synthetize_operation(command, uow)
     handlers.synthetize_operation(variaveis, uow)
 
     logger.info("# Fim da síntese #")
