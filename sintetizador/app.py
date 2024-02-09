@@ -19,6 +19,48 @@ def app():
     pass
 
 
+@click.command("operacao")
+@click.argument(
+    "variaveis",
+    nargs=-1,
+)
+@click.option(
+    "--formato", default="PARQUET", help="formato para escrita da síntese"
+)
+@click.option(
+    "--processadores",
+    default=1,
+    help="numero de processadores para paralelizar",
+)
+def operacao(variaveis, formato, processadores):
+    """
+    Realiza a síntese dos dados da operação do NEWAVE (NWLISTOP).
+    """
+
+    m = Manager()
+    q = m.Queue(-1)
+    Log.start_logging_process(q)
+
+    logger = Log.configure_main_logger(q)
+
+    os.environ["FORMATO_SINTESE"] = formato
+    os.environ["PROCESSADORES"] = str(processadores)
+    logger.info("# Realizando síntese da OPERACAO #")
+
+    uow = factory("FS", os.curdir, q)
+    #command = commands.SynthetizeOperation(variaveis)
+    #handlers.synthetize_operation(command, uow)
+
+    
+    ##handlers.synthetize_operation(variaveis, uow)
+    OperationSynthetizer.synthetize(variaveis, uow)
+
+    logger.info("# Fim da síntese #")
+    time.sleep(1.0)
+    Log.terminate_logging_process()
+
+
+
 @click.command("sistema")
 @click.argument(
     "variaveis",
@@ -117,45 +159,6 @@ def cenarios(variaveis, formato, processadores):
     Log.terminate_logging_process()
 
 
-@click.command("operacao")
-@click.argument(
-    "variaveis",
-    nargs=-1,
-)
-@click.option(
-    "--formato", default="PARQUET", help="formato para escrita da síntese"
-)
-@click.option(
-    "--processadores",
-    default=1,
-    help="numero de processadores para paralelizar",
-)
-def operacao(variaveis, formato, processadores):
-    """
-    Realiza a síntese dos dados da operação do NEWAVE (NWLISTOP).
-    """
-
-    m = Manager()
-    q = m.Queue(-1)
-    Log.start_logging_process(q)
-
-    logger = Log.configure_main_logger(q)
-
-    os.environ["FORMATO_SINTESE"] = formato
-    os.environ["PROCESSADORES"] = str(processadores)
-    logger.info("# Realizando síntese da OPERACAO #")
-
-    uow = factory("FS", os.curdir, q)
-    #command = commands.SynthetizeOperation(variaveis)
-    #handlers.synthetize_operation(command, uow)
-
-    
-    ##handlers.synthetize_operation(variaveis, uow)
-    OperationSynthetizer.synthetize(variaveis, uow)
-
-    logger.info("# Fim da síntese #")
-    time.sleep(1.0)
-    Log.terminate_logging_process()
 
 
 @click.command("politica")
