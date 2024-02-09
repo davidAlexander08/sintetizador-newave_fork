@@ -7,6 +7,8 @@ from sintetizador.services.unitofwork import factory
 from sintetizador.utils.log import Log
 from multiprocessing import Manager
 
+from sintetizador.services.synthesis.operation import OperationSynthetizer
+
 
 @click.group()
 def app():
@@ -146,7 +148,10 @@ def operacao(variaveis, formato, processadores):
     uow = factory("FS", os.curdir, q)
     #command = commands.SynthetizeOperation(variaveis)
     #handlers.synthetize_operation(command, uow)
-    handlers.synthetize_operation(variaveis, uow)
+
+    
+    ##handlers.synthetize_operation(variaveis, uow)
+    OperationSynthetizer.synthetize(variables, uow)
 
     logger.info("# Fim da síntese #")
     time.sleep(1.0)
