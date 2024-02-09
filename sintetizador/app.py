@@ -53,6 +53,8 @@ def operacao(variaveis, formato, processadores):
 
     
     ##handlers.synthetize_operation(variaveis, uow)
+    print(uow)
+    print(variaveis)
     OperationSynthetizer.synthetize(variaveis, uow)
 
     logger.info("# Fim da síntese #")
