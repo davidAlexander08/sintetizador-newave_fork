@@ -151,7 +151,7 @@ def operacao(variaveis, formato, processadores):
 
     
     ##handlers.synthetize_operation(variaveis, uow)
-    OperationSynthetizer.synthetize(variables, uow)
+    OperationSynthetizer.synthetize(variaveis, uow)
 
     logger.info("# Fim da síntese #")
     time.sleep(1.0)
