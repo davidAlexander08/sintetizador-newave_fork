@@ -211,6 +211,7 @@ class SystemSynthetizer:
                 + " síntese do sistema"
             )
         pat = uow.files.get_patamar()
+        print(pat)
         if pat is None:
             raise RuntimeError(
                 "Erro no processamento do patamar.dat para"
