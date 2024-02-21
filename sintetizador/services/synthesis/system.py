@@ -205,7 +205,6 @@ class SystemSynthetizer:
         dger = cls._get_dger(uow)
         print("resolve PAT")
         print(dger)
-        exit(1)
         if dger is None:
             raise RuntimeError(
                 "Erro no processamento do dger.dat para"
