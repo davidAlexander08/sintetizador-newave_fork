@@ -210,6 +210,7 @@ class SystemSynthetizer:
                 "Erro no processamento do dger.dat para"
                 + " síntese do sistema"
             )
+        print("PASSOU DGER")
         pat = uow.files.get_patamar()
         print("PAT: ", pat)
         if pat is None:
