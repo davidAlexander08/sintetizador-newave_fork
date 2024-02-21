@@ -204,14 +204,14 @@ class SystemSynthetizer:
     def __resolve_PAT(cls, uow: AbstractUnitOfWork) -> pd.DataFrame:
         dger = cls._get_dger(uow)
         print("resolve PAT")
-        print(dger)
+        print("DGER: ",dger)
         if dger is None:
             raise RuntimeError(
                 "Erro no processamento do dger.dat para"
                 + " síntese do sistema"
             )
         pat = uow.files.get_patamar()
-        print(pat)
+        print("PAT: ", pat)
         if pat is None:
             raise RuntimeError(
                 "Erro no processamento do patamar.dat para"
