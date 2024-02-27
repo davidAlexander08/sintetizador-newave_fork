@@ -1782,18 +1782,25 @@ class RawFilesRepository(AbstractFilesRepository):
                     "dger.dat não encontrado para síntese" + " dos cenários"
                 )
             mes_inicio = self._validate_data(dger.mes_inicio_estudo, int)
+            print("mes_inicio: ", mes_inicio)
             parpa = self._validate_data(
                 dger.consideracao_media_anual_afluencias, int
             )
+            print("parpa: ", parpa)
             ordem_maxima = self._validate_data(dger.ordem_maxima_parp, int)
+            print("ordem_maxima: ", ordem_maxima)
             num_series_sinteticas = self._validate_data(
                 dger.num_series_sinteticas, int
             )
+            print("num_series_sinteticas: ", num_series_sinteticas)
             ano_inicio = self._validate_data(dger.ano_inicio_estudo, int)
+            print("ano_inicio: ", ano_inicio)
             ano_inicial_historico = self._validate_data(
                 dger.ano_inicial_historico, int
             )
+            print("ano_inicial_historico: ", ano_inicial_historico)
             arq_uhes = self.get_confhd()
+            print("arq_uhes: ", arq_uhes)
             if arq_uhes is None:
                 raise RuntimeError(
                     "confhd.dat não encontrado para síntese" + " dos cenários"
@@ -1801,16 +1808,19 @@ class RawFilesRepository(AbstractFilesRepository):
             n_uhes = self._validate_data(arq_uhes.usinas, pd.DataFrame).shape[
                 0
             ]
+            print("n_uhes: ", n_uhes)
 
             n_estagios = (
                 self._numero_estagios_individualizados() + mes_inicio - 1
             )
+            print("n_estagios: ", n_estagios)
             n_estagios_th = 12 if parpa == 3 else ordem_maxima
             if dger.tipo_simulacao_final == 1:
                 num_series = num_series_sinteticas
             else:
                 num_series = ano_inicio - ano_inicial_historico - 1
             caminho_arq = join(self.__tmppath, "vazaos.dat")
+            print("caminho_arq: ", caminho_arq)
             if pathlib.Path(caminho_arq).exists():
                 self.__vazaos = Vazaos.read(
                     caminho_arq,
