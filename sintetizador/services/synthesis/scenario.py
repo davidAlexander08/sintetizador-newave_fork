@@ -1694,6 +1694,7 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _resolve_qinc_sf(cls, uow: AbstractUnitOfWork) -> pd.DataFrame:
+        print("ENTROU AQUI, _resolve_qinc_sf")
         with uow:
             arq = uow.files.get_vazaos()
             if arq is None:
@@ -1726,6 +1727,7 @@ class ScenarioSynthetizer:
             cls.CACHED_SYNTHESIS[(variable, step)] = CACHING_FUNCTION_MAP[
                 (variable, step)
             ](uow)
+            
         return cls.CACHED_SYNTHESIS.get((variable, step), pd.DataFrame())
 
     @classmethod
