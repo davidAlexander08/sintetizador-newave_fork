@@ -1716,24 +1716,12 @@ class ScenarioSynthetizer:
         CACHING_FUNCTION_MAP: Dict[Tuple[Variable, Step], Callable] = {
             (Variable.ENA_ABSOLUTA, Step.FORWARD): cls._resolve_enaa_forward,
             (Variable.ENA_ABSOLUTA, Step.BACKWARD): cls._resolve_enaa_backward,
-            (
-                Variable.ENA_ABSOLUTA,
-                Step.FINAL_SIMULATION,
-            ): cls._resolve_enaa_sf,
-            (
-                Variable.VAZAO_INCREMENTAL,
-                Step.FORWARD,
-            ): cls._resolve_qinc_forward,
-            (
-                Variable.VAZAO_INCREMENTAL,
-                Step.BACKWARD,
-            ): cls._resolve_qinc_backward,
-            (
-                Variable.VAZAO_INCREMENTAL,
-                Step.FINAL_SIMULATION,
-            ): cls._resolve_qinc_sf,
+            (Variable.ENA_ABSOLUTA, Step.FINAL_SIMULATION): cls._resolve_enaa_sf,
+            ( Variable.VAZAO_INCREMENTAL, Step.FORWARD): cls._resolve_qinc_forward,
+            (  Variable.VAZAO_INCREMENTAL,    Step.BACKWARD ): cls._resolve_qinc_backward,
+            ( Variable.VAZAO_INCREMENTAL,  Step.FINAL_SIMULATION ): cls._resolve_qinc_sf,
         }
-
+        print("cls.CACHED_SYNTHESIS.get((variable, step)): ", cls.CACHED_SYNTHESIS.get((variable, step)))
         if cls.CACHED_SYNTHESIS.get((variable, step)) is None:
             cls.CACHED_SYNTHESIS[(variable, step)] = CACHING_FUNCTION_MAP[
                 (variable, step)
