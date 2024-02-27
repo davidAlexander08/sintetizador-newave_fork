@@ -1959,6 +1959,7 @@ class ScenarioSynthetizer:
         print("synthesis: ", synthesis.spatial_resolution)
         print("variavel: ", synthesis.variable)
         print("step: ", synthesis.step)
+        print("synthesis: ", synthesis)
         RESOLUTION_MAP: Dict[SpatialResolution, List[str]] = {
             SpatialResolution.SISTEMA_INTERLIGADO: [],
             SpatialResolution.SUBMERCADO: ["nome_submercado"],
