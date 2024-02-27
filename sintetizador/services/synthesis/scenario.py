@@ -77,6 +77,7 @@ class ScenarioSynthetizer:
             ScenarioSynthesis.factory(a)
             for a in cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS
         ]
+        print("ARGS: ", args)
         return [arg for arg in args if arg is not None]
 
     @classmethod
