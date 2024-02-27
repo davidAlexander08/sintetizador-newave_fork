@@ -73,6 +73,7 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _default_args(cls) -> List[ScenarioSynthesis]:
+        print("ENTROU AQUI DEFAULT ARGS")
         args = [
             ScenarioSynthesis.factory(a)
             for a in cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS
@@ -2035,6 +2036,7 @@ class ScenarioSynthetizer:
     def synthetize(cls, variables: List[str], uow: AbstractUnitOfWork):
         cls.logger = logging.getLogger("main")
         try:
+            print("VARIAVEIS: ", variables)
             if len(variables) == 0:
                 synthesis_variables = ScenarioSynthetizer._default_args()
             else:
