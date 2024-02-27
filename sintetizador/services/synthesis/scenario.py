@@ -1967,6 +1967,7 @@ class ScenarioSynthetizer:
             SpatialResolution.USINA_HIDROELETRICA: ["nome_usina"],
         }
         df = cls._get_cached_variable(synthesis.variable, synthesis.step, uow)
+        print("cached variable", df)
         df = cls._resolve_group(
             RESOLUTION_MAP[synthesis.spatial_resolution], df
         )
