@@ -1956,6 +1956,7 @@ class ScenarioSynthetizer:
     def _resolve_spatial_resolution(
         cls, synthesis: ScenarioSynthesis, uow: AbstractUnitOfWork
     ) -> pd.DataFrame:
+        print("synthesis: ", synthesis)
         RESOLUTION_MAP: Dict[SpatialResolution, List[str]] = {
             SpatialResolution.SISTEMA_INTERLIGADO: [],
             SpatialResolution.SUBMERCADO: ["nome_submercado"],
