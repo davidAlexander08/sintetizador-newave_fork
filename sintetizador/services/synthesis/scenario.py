@@ -1870,6 +1870,7 @@ class ScenarioSynthetizer:
         df_mlt: pd.DataFrame,
         filter_col: Optional[str],
     ) -> pd.DataFrame:
+        print(df)
         if filter_col is not None:
             df = df.sort_values(["estagio", filter_col, "serie"])
             df_mlt = df_mlt.sort_values(["estagio", filter_col])
