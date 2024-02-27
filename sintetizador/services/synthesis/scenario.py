@@ -1697,6 +1697,7 @@ class ScenarioSynthetizer:
         print("ENTROU AQUI, _resolve_qinc_sf")
         with uow:
             arq = uow.files.get_vazaos()
+            print("arq: ", arq)
             if arq is None:
                 if cls.logger is not None:
                     cls.logger.error("Falha na leitura de séries de vazão")
