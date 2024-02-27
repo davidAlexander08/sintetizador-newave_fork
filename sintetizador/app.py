@@ -153,6 +153,7 @@ def cenarios(variaveis, formato, processadores):
     logger.info("# Realizando síntese de CENÁRIOS #")
 
     uow = factory("FS", os.curdir, q)
+    print("variaveis: ", variaveis)
     command = commands.SynthetizeScenarios(variaveis)
     handlers.synthetize_scenarios(command, uow)
 
