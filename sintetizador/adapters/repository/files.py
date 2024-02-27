@@ -1776,6 +1776,7 @@ class RawFilesRepository(AbstractFilesRepository):
     def get_vazaos(self) -> Optional[Vazaos]:
         if self.__vazaos is None:
             dger = self.get_dger()
+            print("dger: ", dger)
             if dger is None:
                 raise RuntimeError(
                     "dger.dat não encontrado para síntese" + " dos cenários"
