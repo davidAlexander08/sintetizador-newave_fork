@@ -1966,6 +1966,8 @@ class ScenarioSynthetizer:
         df = cls._resolve_group(
             RESOLUTION_MAP[synthesis.spatial_resolution], df
         )
+        print("resolve resolucao especial df: ", df)
+        print("resolve resolucao especial synthesis: ", synthesis)
         return cls._apply_mlt(synthesis, df, uow)
 
     @classmethod
