@@ -1787,18 +1787,9 @@ class ScenarioSynthetizer:
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
             if len(elements) > 0:
-                for element in elements:
-                    df_mlts_elements = pd.concat(
-                        [
-                            df_mlts_elements,
-                            df_mlt.loc[
-                                (df_mlt[filter_col] == element)
-                                & (df_mlt["estagio"] == estagio),
-                                "mlt",
-                            ],
-                        ],
-                        ignore_index=True,
-                    )
+                #for element in elements:
+                #    df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == element) & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
+                #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
             else:
                 df_mlts_elements = pd.concat(
                     [
@@ -1810,7 +1801,7 @@ class ScenarioSynthetizer:
                     ],
                     ignore_index=True,
                 )
-
+        df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1), "mlt" ], ],  ignore_index=True )
         print("df_mlts_elements: ", df_mlts_elements)
         print("num_series: ", num_series)
         mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series)
