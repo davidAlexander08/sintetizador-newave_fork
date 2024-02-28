@@ -35,6 +35,8 @@ def app():
 def operacao(variaveis, formato, processadores):
     """
     Realiza a síntese dos dados da operação do NEWAVE (NWLISTOP).
+
+    exemplo: sintetizador-newave operacao --processadores 64
     """
 
     m = Manager()
@@ -74,6 +76,8 @@ def operacao(variaveis, formato, processadores):
 def sistema(variaveis, formato):
     """
     Realiza a síntese dos dados do sistema do NEWAVE.
+
+    exemplo: sintetizador-newave sistema --processadores 64
     """
     os.environ["FORMATO_SINTESE"] = formato
 
@@ -104,6 +108,8 @@ def sistema(variaveis, formato):
 def execucao(variaveis, formato):
     """
     Realiza a síntese dos dados da execução do NEWAVE.
+
+    exemplo: sintetizador-newave execucao --processadores 64
     """
 
     m = Manager()
@@ -140,6 +146,8 @@ def execucao(variaveis, formato):
 def cenarios(variaveis, formato, processadores):
     """
     Realiza a síntese dos dados de cenários do NEWAVE.
+
+    exemplo: sintetizador-newave cenarios --processadores 64
     """
 
     m = Manager()
