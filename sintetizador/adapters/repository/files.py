@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 import pathlib
 import asyncio
 from os.path import join
-
+from os.path import isfile
 from inewave.newave.caso import Caso
 from inewave.newave.arquivos import Arquivos
 from inewave.newave.patamar import Patamar
@@ -131,8 +131,10 @@ from sintetizador.utils.encoding import converte_codificacao
 from sintetizador.model.operation.variable import Variable
 from sintetizador.model.operation.spatialresolution import SpatialResolution
 from sintetizador.model.operation.temporalresolution import TemporalResolution
-
+from sintetizador.utils.log import Log
 import platform
+import logging
+logger: Optional[logging.Logger] = None
 
 if platform.system() == "Windows":
     Dger.ENCODING = "iso-8859-1"
@@ -275,6 +277,7 @@ class AbstractFilesRepository(ABC):
 
 class RawFilesRepository(AbstractFilesRepository):
     def __init__(self, tmppath: str):
+        cls.logger = logging.getLogger("main")
         self.__tmppath = tmppath
         self.__caso = Caso.read(join(str(self.__tmppath), "caso.dat"))
         self.__arquivos: Optional[Arquivos] = None
@@ -1523,7 +1526,12 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios,
                     n_estagios_th,
                 )
-
+            else:
+                print("Nao encontrou o arquivo " + caminho_arq)
+                if cls.logger is not None:
+                    cls.logger.error("Nao encontrou o arquivo " + caminho_arq)
+                
+        
         return self.__vazaof.get(iteracao)
 
     def get_energiab(self, iteracao: int) -> Optional[Energiab]:
