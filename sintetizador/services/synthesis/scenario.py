@@ -1802,8 +1802,8 @@ class ScenarioSynthetizer:
                 )
 
         mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series)
-        print("mlts_ordenadas: ", mlts_ordenadas)
-        print("num_iteracoes: ", num_iteracoes)
+        print("mlts_ordenadas: ", mlts_ordenadas, " len: ", len(mlts_ordenadas))
+        print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
         df["valorMlt"] = df["valor"] / df["mlt"]
         df.replace([np.inf, -np.inf], 0, inplace=True)
