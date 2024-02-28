@@ -1511,7 +1511,9 @@ class ScenarioSynthetizer:
         convergencia = cls._validate_data(
             cls._get_pmo(uow).convergencia, pd.DataFrame, "convergência"
         )
-        n_iters = convergencia["iteracao"].max()
+        #n_iters = convergencia["iteracao"].max()
+        dger = cls._get_dger(uow)
+        n_iters = dger.num_max_iteracoes
         df_completo = pd.DataFrame()
         n_procs = int(Settings().processors)
         with Pool(processes=n_procs) as pool:
