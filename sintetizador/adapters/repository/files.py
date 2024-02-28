@@ -1834,7 +1834,7 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios_th,
                 )
             else:
-                raise RuntimeError(
+                raise RuntimeError( 
                     caminho_arq.split("/")[-1] + " não encontrado para síntese dos cenários"
                 )
         return self.__vazaos
