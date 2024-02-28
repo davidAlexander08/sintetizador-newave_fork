@@ -1801,6 +1801,8 @@ class ScenarioSynthetizer:
                     ignore_index=True,
                 )
 
+        print("df_mlts_elements: ", df_mlts_elements)
+        print("num_series: ", num_series)
         mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series)
         print("mlts_ordenadas: ", mlts_ordenadas, " len: ", len(mlts_ordenadas))
         print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
