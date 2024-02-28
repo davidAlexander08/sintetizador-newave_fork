@@ -1526,11 +1526,7 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios,
                     n_estagios_th,
                 )
-            else:
-                print("Nao encontrou o arquivo " + caminho_arq)
-                if cls.logger is not None:
-                    cls.logger.error("Nao encontrou o arquivo " + caminho_arq)
-                
+
         
         return self.__vazaof.get(iteracao)
 
@@ -1837,6 +1833,11 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios,
                     n_estagios_th,
                 )
+            else:
+                print("Nao encontrou o arquivo " + caminho_arq)
+                if self.logger is not None:
+                    self.logger.error("Nao encontrou o arquivo " + caminho_arq)
+                
         return self.__vazaos
 
     def get_vazoes(self) -> Optional[Vazoes]:
