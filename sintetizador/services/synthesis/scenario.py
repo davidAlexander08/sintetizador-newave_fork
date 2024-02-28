@@ -2049,6 +2049,7 @@ class ScenarioSynthetizer:
             valid_synthesis = ScenarioSynthetizer.filter_valid_variables(
                 synthesis_variables, uow
             )
+            print(valid_synthesis)
             for s in valid_synthesis:
                 filename = str(s)
 
