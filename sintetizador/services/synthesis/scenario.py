@@ -1802,6 +1802,12 @@ class ScenarioSynthetizer:
                     ],
                     ignore_index=True,
                 )
+
+         #       datas = pd.date_range(
+         #   datetime(year=ano_inicio_historico, month=1, day=1),
+        #    datetime(year=ano_fim_historico, month=12, day=1),
+        #    freq="MS",
+        #)
         df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1), "mlt" ], ],  ignore_index=True )
         print("df_mlts_elements: ", df_mlts_elements)
         print("num_series: ", num_series)
