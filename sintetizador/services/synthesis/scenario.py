@@ -2052,7 +2052,7 @@ class ScenarioSynthetizer:
             print(valid_synthesis)
             if(len(valid_synthesis) == 0):
                 cls.logger.error("Variavel invalida para sintese, por favor tentar alguma das variáveis abaixo:")
-                print(DEFAULT_SCENARIO_SYNTHESIS_ARGS)
+                print(cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS)
             for s in valid_synthesis:
                 filename = str(s)
 
