@@ -277,7 +277,7 @@ class AbstractFilesRepository(ABC):
 
 class RawFilesRepository(AbstractFilesRepository):
     def __init__(self, tmppath: str):
-        cls.logger = logging.getLogger("main")
+        self.logger = logging.getLogger("main")
         self.__tmppath = tmppath
         self.__caso = Caso.read(join(str(self.__tmppath), "caso.dat"))
         self.__arquivos: Optional[Arquivos] = None
