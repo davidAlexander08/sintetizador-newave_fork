@@ -482,6 +482,8 @@ class ScenarioSynthetizer:
         mes_inicio = cls._validate_data(dger.mes_inicio_estudo, int, "dger")
         ano_inicio = cls._validate_data(dger.ano_inicio_estudo, int, "dger")
         anos_estudo = cls._validate_data(dger.num_anos_estudo, int, "dger")
+        anos_pos_estudo = cls._validate_data(dger.num_anos_pos_estudo, int, "dger")
+        print("anos_pos_estudo: ", anos_pos_estudo)
         sistema = cls._validate_data(
             cls._get_sistema(uow).custo_deficit, pd.DataFrame, "submercados"
         )
