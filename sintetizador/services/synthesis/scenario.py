@@ -2050,6 +2050,9 @@ class ScenarioSynthetizer:
                 synthesis_variables, uow
             )
             print(valid_synthesis)
+            if(len(valid_synthesis)):
+                cls.logger.error("Variavel invalida para sintese, por favor tentar alguma das variáveis abaixo:")
+                print(DEFAULT_SCENARIO_SYNTHESIS_ARGS)
             for s in valid_synthesis:
                 filename = str(s)
 
