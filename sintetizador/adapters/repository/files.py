@@ -1834,8 +1834,9 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios_th,
                 )
             else:
-                if self.logger is not None:
-                    self.logger.error("Nao encontrou o arquivo " + caminho_arq.split("/")[-1])
+                raise RuntimeError(
+                    caminho_arq.split("/")[-1] + " não encontrado para síntese dos cenários"
+                )
         return self.__vazaos
 
     def get_vazoes(self) -> Optional[Vazoes]:
