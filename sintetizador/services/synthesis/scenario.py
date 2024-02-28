@@ -1806,6 +1806,7 @@ class ScenarioSynthetizer:
         print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
         print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
+        print("df[mlt] : " , df["mlt"] )
         df["valorMlt"] = df["valor"] / df["mlt"]
         df.replace([np.inf, -np.inf], 0, inplace=True)
         return df
