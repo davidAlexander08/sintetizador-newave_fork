@@ -1760,6 +1760,10 @@ class ScenarioSynthetizer:
         df_mlt: pd.DataFrame,
         filter_col: Optional[str],
     ) -> pd.DataFrame:
+
+        print("df_not_filtered: ", df)
+        print("df_mlt_not_filtered: ", df_mlt)
+        
         if filter_col is not None:
             df = df.sort_values(["iteracao", "estagio", filter_col, "serie"])
             df_mlt = df_mlt.sort_values(["estagio", filter_col])
@@ -1767,13 +1771,17 @@ class ScenarioSynthetizer:
             df = df.sort_values(["iteracao", "estagio", "serie"])
             df_mlt = df_mlt.sort_values(["estagio"])
 
+        print("df_filtered: ", df)
+        print("df_mlt_filtered: ", df_mlt)
+        
         series = df["serie"].unique()
         num_series = len(series)
         estagios = df["estagio"].unique()
         iteracoes = df["iteracao"].unique()
         num_iteracoes = len(iteracoes)
+        print("num_iteracoes: ", num_iteracoes)
         elements = df[filter_col].unique() if filter_col is not None else []
-
+        print("elements: ", elements)
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
             if len(elements) > 0:
