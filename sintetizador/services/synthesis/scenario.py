@@ -501,9 +501,9 @@ class ScenarioSynthetizer:
             datetime(year=ano_inicio + anos_estudo - 1, month=12, day=1),
             freq="MS",
         )
-        print("estagio: ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)))
-        print("configuracao: ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)))
-        print("mes: ", [d.month for d in datas])
+        print("estagio: ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)), " len: ", len(list(range(-(12 + mes_inicio - 2), len(cfgs) + 1))))
+        print("configuracao: ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)), " len: ", len(np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs))))
+        print("mes: ", [d.month for d in datas], " len: ", len([d.month for d in datas]))
         df_mlt = pd.DataFrame(data={"estagio": list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)),
                                     "configuracao": np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)),
                                     "mes": [d.month for d in datas] } )
