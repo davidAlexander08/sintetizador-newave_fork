@@ -907,6 +907,8 @@ class ScenarioSynthetizer:
         vazaof_dados["estagio"] -= mes_inicio - 1
         vazaof_dados = vazaof_dados.loc[vazaof_dados["estagio"] > 0]
         vazaof_dados.drop(columns=["uhe"], inplace=True)
+
+        print("vazaof_dados: ", vazaof_dados)
         return vazaof_dados[
             [
                 "estagio",
@@ -1282,7 +1284,7 @@ class ScenarioSynthetizer:
         """
         Adiciona dados de código da UHE, nome da UHE, ree da UHE e
         submercado da UHE aos dados de vazão lidos do arquivo
-        binário `vazaof.dat`.
+        binário `vazaos.dat`.
 
         - estagio (`int`)
         - data (`datetime`)
