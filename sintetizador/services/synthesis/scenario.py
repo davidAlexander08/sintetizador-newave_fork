@@ -1789,7 +1789,7 @@ class ScenarioSynthetizer:
         num_iteracoes = len(iteracoes)
         print("num_iteracoes: ", num_iteracoes)
         elements = df[filter_col].unique() if filter_col is not None else []
-        print("elements: ", elements)
+        print("elements: ", elements, " len: ", len(elements))
 
         print("estagios_mlt: ", df_mlt["estagio"].unique())
         
