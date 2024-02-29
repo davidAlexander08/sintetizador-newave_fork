@@ -1514,7 +1514,7 @@ class RawFilesRepository(AbstractFilesRepository):
             ]
 
             n_estagios = (
-                self._numero_estagios_individualizados() - mes_inicio + 1
+                self._numero_estagios_individualizados() - mes_inicio + 2
             )
             print("self._numero_estagios_individualizados(): ", self._numero_estagios_individualizados())
             print("mes_inicio: ", mes_inicio)
