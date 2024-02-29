@@ -1821,8 +1821,8 @@ class ScenarioSynthetizer:
         print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
         print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
         print("df: ", df)
-        print("df_filtro: ", df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["estagio"] == 1) & (df["iteracao"] == 1)  ])
-        print("estagios df_filtro: ",  df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["iteracao"] == 1)  ]["estagio"].unique() )
+        #print("df_filtro: ", df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["estagio"] == 1) & (df["iteracao"] == 1)  ])
+        #print("estagios df_filtro: ",  df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["iteracao"] == 1)  ]["estagio"].unique() )
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
         print("df[mlt] : " , df["mlt"] )
         df["valorMlt"] = df["valor"] / df["mlt"]
