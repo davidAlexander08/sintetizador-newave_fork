@@ -1815,6 +1815,7 @@ class ScenarioSynthetizer:
         df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1), "mlt" ], ],  ignore_index=True )
         print("df_mlts_elements: ", df_mlts_elements)
         print("df_mlt_filtrado_14: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1)])
+        print("estagios mlt: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO")]["estagio"].unique() )
         print("num_series: ", num_series)
         mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series*num_iteracoes)
         print("mlts_ordenadas: ", mlts_ordenadas, " len: ", len(mlts_ordenadas))
@@ -1822,6 +1823,7 @@ class ScenarioSynthetizer:
         print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
         print("df: ", df)
         print("df_filtro: ", df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["estagio"] == 1) & (df["iteracao"] == 1)  ])
+        print("estagios df_filtro: ",  df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["iteracao"] == 1)  ]["estagio"].unique() )
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
         print("df[mlt] : " , df["mlt"] )
         df["valorMlt"] = df["valor"] / df["mlt"]
