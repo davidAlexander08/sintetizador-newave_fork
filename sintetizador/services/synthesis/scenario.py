@@ -1285,7 +1285,10 @@ class ScenarioSynthetizer:
         :rtype: pd.DataFrame
         """
         # Extrai dimensões para repetir vetores
+
+        
         vazaos_dados = vazaos.copy()
+        print("vazaos_dados: ", vazaos_dados)
         series = vazaos_dados["serie"].unique()
         num_series = len(series)
         uhes = vazaos_dados["uhe"].unique()
