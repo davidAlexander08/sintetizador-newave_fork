@@ -1783,11 +1783,15 @@ class ScenarioSynthetizer:
         series = df["serie"].unique()
         num_series = len(series)
         estagios = df["estagio"].unique()
+        print("estagios_DF: ", estagios)
         iteracoes = df["iteracao"].unique()
         num_iteracoes = len(iteracoes)
         print("num_iteracoes: ", num_iteracoes)
         elements = df[filter_col].unique() if filter_col is not None else []
         print("elements: ", elements)
+
+        print("estagios_mlt: ", df_mlt["estagio"])
+        
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
             if len(elements) > 0 :
