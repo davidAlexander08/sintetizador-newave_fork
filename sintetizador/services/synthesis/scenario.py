@@ -1790,11 +1790,11 @@ class ScenarioSynthetizer:
         print("elements: ", elements)
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
-            if len(elements) > 0:
+            if len(elements) > 0 :
                 print("HAHA")
                 #for element in elements:
                 #    df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == element) & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
-                #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
+                df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
             else:
                 df_mlts_elements = pd.concat(
                     [
@@ -1812,12 +1812,11 @@ class ScenarioSynthetizer:
         #    datetime(year=ano_fim_historico, month=12, day=1),
         #    freq="MS",
         #)
-        df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1), "mlt" ], ],  ignore_index=True )
+        df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO"), "mlt" ], ],  ignore_index=True )
         print("df_mlts_elements: ", df_mlts_elements)
-        print("df_mlt_filtrado_14: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == 1)])
         print("estagios mlt: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO")]["estagio"].unique() )
         print("num_series: ", num_series)
-        mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series*num_iteracoes)
+        mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series)
         print("mlts_ordenadas: ", mlts_ordenadas, " len: ", len(mlts_ordenadas))
         print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
         print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
