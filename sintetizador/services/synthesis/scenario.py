@@ -606,7 +606,7 @@ class ScenarioSynthetizer:
         if cls.logger is not None:
             cls.logger.info("Calculando séries de MLT para QINC - REE")
         return cls._agrega_serie_mlt_uhe(
-            Variable.VAZAO_INCREMENTAL, "nome", uow
+            Variable.VAZAO_INCREMENTAL, "nome_usina", uow
         )
 
     @classmethod
