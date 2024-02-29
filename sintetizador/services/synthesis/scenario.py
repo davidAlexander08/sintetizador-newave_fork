@@ -73,12 +73,10 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _default_args(cls) -> List[ScenarioSynthesis]:
-        #print("ENTROU AQUI DEFAULT ARGS")
         args = [
             ScenarioSynthesis.factory(a)
             for a in cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS
         ]
-        #print("ARGS: ", args)
         return [arg for arg in args if arg is not None]
 
     @classmethod
@@ -483,8 +481,6 @@ class ScenarioSynthetizer:
         ano_inicio = cls._validate_data(dger.ano_inicio_estudo, int, "dger")
         anos_estudo = cls._validate_data(dger.num_anos_estudo, int, "dger")
         anos_pos_estudo = cls._validate_data(dger.num_anos_pos_estudo, int, "dger")
-        #print("anos_pos_estudo: ", anos_pos_estudo)
-        #print("anos_estudo: ", anos_estudo)
         sistema = cls._validate_data(
             cls._get_sistema(uow).custo_deficit, pd.DataFrame, "submercados"
         )
@@ -499,19 +495,11 @@ class ScenarioSynthetizer:
             arq_engnat.series, pd.DataFrame, "séries de energia"
         )
         cfgs = configuracoes["valor"].to_numpy().flatten()[mes_inicio - 1 :]
-        #print("cfgs: ", cfgs)
         datas = pd.date_range(
             datetime(year=ano_inicio - 1, month=1, day=1),
             datetime(year=ano_inicio + anos_estudo + anos_pos_estudo - 1, month=12, day=1),
             freq="MS",
         )
-
-        
-        #print("estagio: ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)), " len: ", len(list(range(-(12 + mes_inicio - 2), len(cfgs) + 1))))
-        #print("configuracao: ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)), " len: ", len(np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs))))
-        #print("mes: ", [d.month for d in datas], " len: ", len([d.month for d in datas]))
-
-        #print("d.month: ", datas.month, " datas: ", datas)
         
         df_mlt = pd.DataFrame(data={"estagio": list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)),
                                     "configuracao": np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)),
@@ -541,11 +529,9 @@ class ScenarioSynthetizer:
                 sistema["codigo_submercado"] == linha["submercado"],
                 "nome_submercado",
             ].iloc[0]
-            #print("df_mlt_ree: ", df_mlt_ree)
             dfs_mlt_rees = pd.concat(
                 [dfs_mlt_rees, df_mlt_ree], ignore_index=True
             )
-        #print("dfs_mlt_rees: ", dfs_mlt_rees)
         return dfs_mlt_rees
 
     @classmethod
@@ -815,7 +801,6 @@ class ScenarioSynthetizer:
         """
         # Extrai dimensões para repetir vetores
         vazaof_dados = vazaof.copy()
-        print("vazaof_dados: ", vazaof_dados)
         series = vazaof_dados["serie"].unique()
         num_series = len(series)
         uhes = vazaof_dados["uhe"].unique()
@@ -841,7 +826,6 @@ class ScenarioSynthetizer:
             axis=1,
             result_type="expand",
         )
-        print("dados_uhes: " , dados_uhes)
         dados_uhes[3] = dados_uhes.apply(
             lambda linha: rees.loc[
                 rees["codigo"] == linha[2], "nome"
@@ -907,11 +891,9 @@ class ScenarioSynthetizer:
         ]
         
         vazaof_dados["estagio"] -= mes_inicio - 1
-        print("vazaof_dados.loc[(vazaof_dados[valor] == 332.96)]: ", vazaof_dados.loc[(vazaof_dados["valor"] == 332.96)])
         vazaof_dados = vazaof_dados.loc[vazaof_dados["estagio"] > 0]
         vazaof_dados.drop(columns=["uhe"], inplace=True)
 
-        print("vazaof_dados: ", vazaof_dados)
         return vazaof_dados[
             [
                 "estagio",
@@ -1304,7 +1286,6 @@ class ScenarioSynthetizer:
         """
         # Extrai dimensões para repetir vetores
         vazaos_dados = vazaos.copy()
-        print("vazaos_dados inicio: ", vazaos_dados)
         series = vazaos_dados["serie"].unique()
         num_series = len(series)
         uhes = vazaos_dados["uhe"].unique()
@@ -1376,7 +1357,6 @@ class ScenarioSynthetizer:
         vazaos_dados = vazaos_dados.loc[vazaos_dados["estagio"] > 0]
         vazaos_dados.drop(columns=["uhe"], inplace=True)
 
-        print("vazaos_dados: ", vazaos_dados)
         return vazaos_dados[
             [
                 "estagio",
@@ -1698,10 +1678,8 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _resolve_qinc_sf(cls, uow: AbstractUnitOfWork) -> pd.DataFrame:
-        #print("ENTROU AQUI, _resolve_qinc_sf")
         with uow:
             arq = uow.files.get_vazaos()
-            #print("arq: ", arq)
             if arq is None:
                 if cls.logger is not None:
                     cls.logger.error("Falha na leitura de séries de vazão")
@@ -1727,7 +1705,6 @@ class ScenarioSynthetizer:
             (  Variable.VAZAO_INCREMENTAL,    Step.BACKWARD ): cls._resolve_qinc_backward,
             ( Variable.VAZAO_INCREMENTAL,  Step.FINAL_SIMULATION ): cls._resolve_qinc_sf,
         }
-        #print("cls.CACHED_SYNTHESIS.get((variable, step)): ", cls.CACHED_SYNTHESIS.get((variable, step)))
         if cls.CACHED_SYNTHESIS.get((variable, step)) is None:
             cls.CACHED_SYNTHESIS[(variable, step)] = CACHING_FUNCTION_MAP[
                 (variable, step)
@@ -1756,8 +1733,6 @@ class ScenarioSynthetizer:
         filter_col: Optional[str],
     ) -> pd.DataFrame:
 
-        #print("df_not_filtered: ", df)
-        #print("df_mlt_not_filtered: ", df_mlt)
         
         if filter_col is not None:
             df = df.sort_values(["iteracao", "estagio", filter_col, "serie"])
@@ -1766,28 +1741,20 @@ class ScenarioSynthetizer:
             df = df.sort_values(["iteracao", "estagio", "serie"])
             df_mlt = df_mlt.sort_values(["estagio"])
 
-        print("df_filtered: ", df)
-        print("df_mlt_filtered: ", df_mlt)
         
         series = df["serie"].unique()
         num_series = len(series)
         estagios = df["estagio"].unique()
-        print("estagios_DF: ", estagios)
         iteracoes = df["iteracao"].unique()
         num_iteracoes = len(iteracoes)
-        print("num_iteracoes: ", num_iteracoes)
         elements = df[filter_col].unique() if filter_col is not None else []
-        print("elements: ", elements, " len: ", len(elements))
 
-        print("estagios_mlt: ", df_mlt["estagio"].unique())
         
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
             if len(elements) > 0 :
-                print("estagio iterando: ", estagio)
                 for element in elements:
                     df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == element) & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
-                #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
             else:
                 df_mlts_elements = pd.concat(
                     [
@@ -1800,44 +1767,9 @@ class ScenarioSynthetizer:
                     ignore_index=True,
                 )
 
-         #       datas = pd.date_range(
-         #   datetime(year=ano_inicio_historico, month=1, day=1),
-        #    datetime(year=ano_fim_historico, month=12, day=1),
-        #    freq="MS",
-        #)
-        #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO"), "mlt" ], ],  ignore_index=True )
-        print("df_mlts_elements: ", df_mlts_elements)
-        print("estagios mlt: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO")]["estagio"].unique() )
-        print("num_series: ", num_series)
         mlts_ordenadas = np.repeat(df_mlts_elements.to_numpy(), num_series)
-        print("mlts_ordenadas: ", mlts_ordenadas, " len: ", len(mlts_ordenadas))
-        print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
-        print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
-        print("df: ", df)
-        print("estagio 59 df_filtro: ",  df.loc[(df["estagio"] == 59)]["valor"].unique() )
-        print("estagio 60 df_filtro: ",  df.loc[(df["estagio"] == 60)]["valor"].unique() )
 
-        print("estagio -12 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -12)] )
-        print("estagio -11 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -11)] )
-        print("estagio -10 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -10)] )
-        print("estagio -9 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -9)] )
-        print("estagio -8 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -8)] )
-        print("estagio -7 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -7)] )
-        print("estagio -6 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -6)] )
-        print("estagio -5 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -5)] )
-        print("estagio -4 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -4)] )
-        print("estagio -3 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -3)] )
-        print("estagio -2 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -2)] )
-        print("estagio -1 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == -1)] )
-        print("estagio 0 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == 0)] )
-        print("estagio 1 df_mlt: ",  df_mlt.loc[(df_mlt["nome_usina"] == "14 DE JULHO") & (df_mlt["estagio"] == 1)] )
-        
-        print("estagio 59 df_mlt: ",  df_mlt.loc[(df_mlt["estagio"] == 59)]["mlt"].unique() )
-        print("estagio 60 df_mlt: ",  df_mlt.loc[(df_mlt["estagio"] == 60)]["mlt"].unique() )
-        #print("df_filtro: ", df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["estagio"] == 1) & (df["iteracao"] == 1)  ])
-        #print("estagios df_filtro: ",  df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["iteracao"] == 1)  ]["estagio"].unique() )
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
-        print("df[mlt] : " , df["mlt"] )
         df["valorMlt"] = df["valor"] / df["mlt"]
         df.replace([np.inf, -np.inf], 0, inplace=True)
         return df
@@ -1849,7 +1781,6 @@ class ScenarioSynthetizer:
         df_mlt: pd.DataFrame,
         filter_col: Optional[str],
     ) -> pd.DataFrame:
-        print(df)
         if filter_col is not None:
             df = df.sort_values(["estagio", filter_col, "serie", "abertura"])
             df_mlt = df_mlt.sort_values(["estagio", filter_col])
@@ -1908,7 +1839,6 @@ class ScenarioSynthetizer:
         df_mlt: pd.DataFrame,
         filter_col: Optional[str],
     ) -> pd.DataFrame:
-        print("apply_mlt_sf: ", df)
         if filter_col is not None:
             df = df.sort_values(["estagio", filter_col, "serie"])
             df_mlt = df_mlt.sort_values(["estagio", filter_col])
@@ -1963,8 +1893,6 @@ class ScenarioSynthetizer:
     ) -> pd.DataFrame:
         # Descobre o valor em MLT
         df = df.copy()
-        print("synthesis.variable: ", synthesis.variable)
-        print("synthesis.spatial_resolution: ", synthesis.spatial_resolution)
         df_mlt = cls._get_cached_mlt(
             synthesis.variable,
             synthesis.spatial_resolution,
@@ -1984,19 +1912,12 @@ class ScenarioSynthetizer:
             Step.FINAL_SIMULATION: cls._apply_mlt_sf,
             Step.BACKWARD: cls._apply_mlt_backward,
         }
-        print("df: ", df )
-        print("df_mlt: ", df_mlt )
-        print("filter_col: ", filter_col)
         return APPLY_MAP[synthesis.step](df, df_mlt, filter_col)
 
     @classmethod
     def _resolve_spatial_resolution(
         cls, synthesis: ScenarioSynthesis, uow: AbstractUnitOfWork
     ) -> pd.DataFrame:
-        print("synthesis: ", synthesis.spatial_resolution)
-        print("variavel: ", synthesis.variable)
-        print("step: ", synthesis.step)
-        print("synthesis: ", synthesis)
         RESOLUTION_MAP: Dict[SpatialResolution, List[str]] = {
             SpatialResolution.SISTEMA_INTERLIGADO: [],
             SpatialResolution.SUBMERCADO: ["nome_submercado"],
@@ -2004,12 +1925,9 @@ class ScenarioSynthetizer:
             SpatialResolution.USINA_HIDROELETRICA: ["nome_usina"],
         }
         df = cls._get_cached_variable(synthesis.variable, synthesis.step, uow)
-        print("cached variable", df)
         df = cls._resolve_group(
             RESOLUTION_MAP[synthesis.spatial_resolution], df
         )
-        print("resolve resolucao especial df: ", df)
-        print("resolve resolucao especial synthesis: ", synthesis)
         return cls._apply_mlt(synthesis, df, uow)
 
     @classmethod
@@ -2085,7 +2003,6 @@ class ScenarioSynthetizer:
     def synthetize(cls, variables: List[str], uow: AbstractUnitOfWork):
         cls.logger = logging.getLogger("main")
         try:
-            print("VARIAVEIS: ", variables)
             if len(variables) == 0:
                 synthesis_variables = ScenarioSynthetizer._default_args()
             else:
@@ -2095,7 +2012,6 @@ class ScenarioSynthetizer:
             valid_synthesis = ScenarioSynthetizer.filter_valid_variables(
                 synthesis_variables, uow
             )
-            print(valid_synthesis)
             if(len(valid_synthesis) == 0):
                 cls.logger.error("Variavel invalida para sintese, por favor tentar alguma das variáveis abaixo:")
                 cls.logger.error(cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS)
