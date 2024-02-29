@@ -73,12 +73,12 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _default_args(cls) -> List[ScenarioSynthesis]:
-        print("ENTROU AQUI DEFAULT ARGS")
+        #print("ENTROU AQUI DEFAULT ARGS")
         args = [
             ScenarioSynthesis.factory(a)
             for a in cls.DEFAULT_SCENARIO_SYNTHESIS_ARGS
         ]
-        print("ARGS: ", args)
+        #print("ARGS: ", args)
         return [arg for arg in args if arg is not None]
 
     @classmethod
@@ -483,8 +483,8 @@ class ScenarioSynthetizer:
         ano_inicio = cls._validate_data(dger.ano_inicio_estudo, int, "dger")
         anos_estudo = cls._validate_data(dger.num_anos_estudo, int, "dger")
         anos_pos_estudo = cls._validate_data(dger.num_anos_pos_estudo, int, "dger")
-        print("anos_pos_estudo: ", anos_pos_estudo)
-        print("anos_estudo: ", anos_estudo)
+        #print("anos_pos_estudo: ", anos_pos_estudo)
+        #print("anos_estudo: ", anos_estudo)
         sistema = cls._validate_data(
             cls._get_sistema(uow).custo_deficit, pd.DataFrame, "submercados"
         )
@@ -499,7 +499,7 @@ class ScenarioSynthetizer:
             arq_engnat.series, pd.DataFrame, "séries de energia"
         )
         cfgs = configuracoes["valor"].to_numpy().flatten()[mes_inicio - 1 :]
-        print("cfgs: ", cfgs)
+        #print("cfgs: ", cfgs)
         datas = pd.date_range(
             datetime(year=ano_inicio - 1, month=1, day=1),
             datetime(year=ano_inicio + anos_estudo + anos_pos_estudo - 1, month=12, day=1),
@@ -507,11 +507,11 @@ class ScenarioSynthetizer:
         )
 
         
-        print("estagio: ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)), " len: ", len(list(range(-(12 + mes_inicio - 2), len(cfgs) + 1))))
-        print("configuracao: ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)), " len: ", len(np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs))))
-        print("mes: ", [d.month for d in datas], " len: ", len([d.month for d in datas]))
+        #print("estagio: ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)), " len: ", len(list(range(-(12 + mes_inicio - 2), len(cfgs) + 1))))
+        #print("configuracao: ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)), " len: ", len(np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs))))
+        #print("mes: ", [d.month for d in datas], " len: ", len([d.month for d in datas]))
 
-        print("d.month: ", datas.month, " datas: ", datas)
+        #print("d.month: ", datas.month, " datas: ", datas)
         
         df_mlt = pd.DataFrame(data={"estagio": list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)),
                                     "configuracao": np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)),
@@ -541,11 +541,11 @@ class ScenarioSynthetizer:
                 sistema["codigo_submercado"] == linha["submercado"],
                 "nome_submercado",
             ].iloc[0]
-            print("df_mlt_ree: ", df_mlt_ree)
+            #print("df_mlt_ree: ", df_mlt_ree)
             dfs_mlt_rees = pd.concat(
                 [dfs_mlt_rees, df_mlt_ree], ignore_index=True
             )
-        print("dfs_mlt_rees: ", dfs_mlt_rees)
+        #print("dfs_mlt_rees: ", dfs_mlt_rees)
         return dfs_mlt_rees
 
     @classmethod
@@ -1705,10 +1705,10 @@ class ScenarioSynthetizer:
 
     @classmethod
     def _resolve_qinc_sf(cls, uow: AbstractUnitOfWork) -> pd.DataFrame:
-        print("ENTROU AQUI, _resolve_qinc_sf")
+        #print("ENTROU AQUI, _resolve_qinc_sf")
         with uow:
             arq = uow.files.get_vazaos()
-            print("arq: ", arq)
+            #print("arq: ", arq)
             if arq is None:
                 if cls.logger is not None:
                     cls.logger.error("Falha na leitura de séries de vazão")
@@ -1734,7 +1734,7 @@ class ScenarioSynthetizer:
             (  Variable.VAZAO_INCREMENTAL,    Step.BACKWARD ): cls._resolve_qinc_backward,
             ( Variable.VAZAO_INCREMENTAL,  Step.FINAL_SIMULATION ): cls._resolve_qinc_sf,
         }
-        print("cls.CACHED_SYNTHESIS.get((variable, step)): ", cls.CACHED_SYNTHESIS.get((variable, step)))
+        #print("cls.CACHED_SYNTHESIS.get((variable, step)): ", cls.CACHED_SYNTHESIS.get((variable, step)))
         if cls.CACHED_SYNTHESIS.get((variable, step)) is None:
             cls.CACHED_SYNTHESIS[(variable, step)] = CACHING_FUNCTION_MAP[
                 (variable, step)
@@ -1763,8 +1763,8 @@ class ScenarioSynthetizer:
         filter_col: Optional[str],
     ) -> pd.DataFrame:
 
-        print("df_not_filtered: ", df)
-        print("df_mlt_not_filtered: ", df_mlt)
+        #print("df_not_filtered: ", df)
+        #print("df_mlt_not_filtered: ", df_mlt)
         
         if filter_col is not None:
             df = df.sort_values(["iteracao", "estagio", filter_col, "serie"])
