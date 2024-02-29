@@ -1812,7 +1812,7 @@ class ScenarioSynthetizer:
         #    datetime(year=ano_fim_historico, month=12, day=1),
         #    freq="MS",
         #)
-        df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO"), "mlt" ], ],  ignore_index=True )
+        #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO"), "mlt" ], ],  ignore_index=True )
         print("df_mlts_elements: ", df_mlts_elements)
         print("estagios mlt: ",  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO")]["estagio"].unique() )
         print("num_series: ", num_series)
