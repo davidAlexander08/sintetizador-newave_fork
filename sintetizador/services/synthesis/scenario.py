@@ -1359,7 +1359,7 @@ class ScenarioSynthetizer:
         vazaos_dados["estagio"] -= mes_inicio - 1
         vazaos_dados = vazaos_dados.loc[vazaos_dados["estagio"] > 0]
         vazaos_dados.drop(columns=["uhe"], inplace=True)
-
+        print("vazaos_dados: ", vazaos_dados)
         return vazaos_dados[
             [
                 "estagio",
