@@ -1282,7 +1282,7 @@ class ScenarioSynthetizer:
         """
         Adiciona dados de código da UHE, nome da UHE, ree da UHE e
         submercado da UHE aos dados de vazão lidos do arquivo
-        binário `vazaos.dat`.
+        binário `vazaof.dat`.
 
         - estagio (`int`)
         - data (`datetime`)
@@ -1299,6 +1299,7 @@ class ScenarioSynthetizer:
         """
         # Extrai dimensões para repetir vetores
         vazaos_dados = vazaos.copy()
+        print("vazaos_dados inicio: ", vazaos_dados)
         series = vazaos_dados["serie"].unique()
         num_series = len(series)
         uhes = vazaos_dados["uhe"].unique()
@@ -1317,31 +1318,10 @@ class ScenarioSynthetizer:
         mes_inicio = cls._validate_data(dger.mes_inicio_estudo, int, "dger")
         ano_inicio = cls._validate_data(dger.ano_inicio_estudo, int, "dger")
 
-        dados_uhes = pd.DataFrame(uhes).apply(
-            lambda linha: confhd.loc[
-                linha[0] - 1, ["codigo_usina", "nome_usina", "ree"]
-            ].tolist(),
-            axis=1,
-            result_type="expand",
-        )
-        dados_uhes[3] = dados_uhes.apply(
-            lambda linha: rees.loc[
-                rees["codigo"] == linha[2], "nome"
-            ].tolist()[0],
-            axis=1,
-        )
-        dados_uhes[4] = dados_uhes.apply(
-            lambda linha: rees.loc[
-                rees["codigo"] == linha[2], "submercado"
-            ].tolist()[0],
-            axis=1,
-        )
-        dados_uhes[5] = dados_uhes.apply(
-            lambda linha: sistema.loc[
-                sistema["codigo_submercado"] == linha[4], "nome_submercado"
-            ].tolist()[0],
-            axis=1,
-        )
+        dados_uhes = pd.DataFrame(uhes).apply(   lambda linha: confhd.loc[ linha[0] - 1, ["codigo_usina", "nome_usina", "ree"] ].tolist(),  axis=1,   result_type="expand"  )
+        dados_uhes[3] = dados_uhes.apply(   lambda linha: rees.loc[    rees["codigo"] == linha[2], "nome"   ].tolist()[0],   axis=1,  )
+        dados_uhes[4] = dados_uhes.apply(     lambda linha: rees.loc[    rees["codigo"] == linha[2], "submercado"     ].tolist()[0],  axis=1,   )
+        dados_uhes[5] = dados_uhes.apply(    lambda linha: sistema.loc[    sistema["codigo_submercado"] == linha[4], "nome_submercado"    ].tolist()[0],   axis=1, )
         # Gera os vetores da dimensão do DF extraído do arquivo vazaof
         codigos_ordenados = cls._formata_dados_series(
             dados_uhes[0].to_numpy(), num_series, num_estagios
@@ -1390,6 +1370,8 @@ class ScenarioSynthetizer:
         vazaos_dados["estagio"] -= mes_inicio - 1
         vazaos_dados = vazaos_dados.loc[vazaos_dados["estagio"] > 0]
         vazaos_dados.drop(columns=["uhe"], inplace=True)
+
+        print("vazaos_dados: ", vazaos_dados)
         return vazaos_dados[
             [
                 "estagio",
