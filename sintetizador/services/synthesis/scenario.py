@@ -815,6 +815,7 @@ class ScenarioSynthetizer:
         """
         # Extrai dimensões para repetir vetores
         vazaof_dados = vazaof.copy()
+        print("vazaof_dados: ", vazaof_dados)
         series = vazaof_dados["serie"].unique()
         num_series = len(series)
         uhes = vazaof_dados["uhe"].unique()
