@@ -905,8 +905,9 @@ class ScenarioSynthetizer:
         vazaof_dados["data_fim"] = [
             d + relativedelta(months=1) for d in datas_ordenadas
         ]
+        
+        vazaof_dados["estagio"] -= mes_inicio - 1
         print("vazaof_dados.loc[(vazaof_dados[valor] == 332.96)]: ", vazaof_dados.loc[(vazaof_dados["valor"] == 332.96)])
-        #vazaof_dados["estagio"] -= mes_inicio - 1
         vazaof_dados = vazaof_dados.loc[vazaof_dados["estagio"] > 0]
         vazaof_dados.drop(columns=["uhe"], inplace=True)
 
