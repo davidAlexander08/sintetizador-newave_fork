@@ -1813,10 +1813,12 @@ class RawFilesRepository(AbstractFilesRepository):
                 0
             ]
             print("n_uhes: ", n_uhes)
-
             n_estagios = (
-                self._numero_estagios_individualizados() + mes_inicio - 1
+                self._numero_estagios_individualizados() - mes_inicio + 2
             )
+            #n_estagios = (
+            #    self._numero_estagios_individualizados() + mes_inicio - 1
+            #)
             print("n_estagios: ", n_estagios)
             n_estagios_th = 12 if parpa == 3 else ordem_maxima
             if dger.tipo_simulacao_final == 1:
@@ -1833,6 +1835,7 @@ class RawFilesRepository(AbstractFilesRepository):
                     n_estagios,
                     n_estagios_th,
                 )
+                print("self.__vazaos: ", self.__vazaos)
             else:
                 raise RuntimeError( 
                     caminho_arq.split("/")[-1] + " não encontrado para síntese dos cenários"
