@@ -1849,6 +1849,8 @@ class ScenarioSynthetizer:
         series = df["serie"].unique()
         num_series = len(series)
         estagios = df["estagio"].unique()
+        print("estagios: ", estagios)
+        print("estagios: ", df_mlt["estagio"].unique())
         elements = df[filter_col].unique() if filter_col is not None else []
 
         df_mlts_elements = pd.DataFrame()
