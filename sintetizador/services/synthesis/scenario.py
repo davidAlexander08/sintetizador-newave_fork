@@ -1515,7 +1515,8 @@ class ScenarioSynthetizer:
         )
         #n_iters = convergencia["iteracao"].max()
         dger = cls._get_dger(uow)
-        n_iters = dger.num_max_iteracoes
+        #n_iters = dger.num_max_iteracoes
+        n_iters = 1
         df_completo = pd.DataFrame()
         n_procs = int(Settings().processors)
         with Pool(processes=n_procs) as pool:
@@ -1795,7 +1796,6 @@ class ScenarioSynthetizer:
         df_mlts_elements = pd.DataFrame()
         for estagio in estagios:
             if len(elements) > 0 :
-                print("HAHA")
                 for element in elements:
                     df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == element) & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
                 #df_mlts_elements = pd.concat( [ df_mlts_elements,  df_mlt.loc[(df_mlt[filter_col] == "14 DE JULHO") & (df_mlt["estagio"] == estagio), "mlt" ], ],  ignore_index=True )
@@ -1825,7 +1825,7 @@ class ScenarioSynthetizer:
         print("num_iteracoes: ", num_iteracoes, " len: ", num_iteracoes)
         print("np.tile(mlts_ordenadas, num_iteracoes): ", np.tile(mlts_ordenadas, num_iteracoes), " len: ", len(np.tile(mlts_ordenadas, num_iteracoes)))
         print("df: ", df)
-        print("estagio 60 df_filtro: ",  df.loc[(df["estagio"] == 60)].tolist() )
+        print("estagio 60 df_filtro: ",  df.loc[(df["estagio"] == 60)] )
         #print("df_filtro: ", df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["estagio"] == 1) & (df["iteracao"] == 1)  ])
         #print("estagios df_filtro: ",  df.loc[(df["nome_usina"] == "14 DE JULHO") & (df["iteracao"] == 1)  ]["estagio"].unique() )
         df["mlt"] = np.tile(mlts_ordenadas, num_iteracoes)
