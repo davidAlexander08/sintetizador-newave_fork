@@ -1516,9 +1516,6 @@ class RawFilesRepository(AbstractFilesRepository):
             n_estagios = (
                 self._numero_estagios_individualizados() - mes_inicio + 2
             )
-            print("self._numero_estagios_individualizados(): ", self._numero_estagios_individualizados())
-            print("mes_inicio: ", mes_inicio)
-            print("n_estagios: ", n_estagios)
             n_estagios_th = 12 if parpa == 3 else ordem_maxima
             caminho_arq = join(self.__tmppath, nome_arq)
             if pathlib.Path(caminho_arq).exists():
