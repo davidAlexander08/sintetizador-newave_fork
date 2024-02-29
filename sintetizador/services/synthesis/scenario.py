@@ -560,6 +560,8 @@ class ScenarioSynthetizer:
             uow,
         )
         col_list = [col] if col is not None else []
+
+        print("col_list: ", col_list)
         df = (
             mlt_uhe.groupby(col_list + ["estagio"])
             .sum(numeric_only=True)
