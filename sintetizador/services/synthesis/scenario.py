@@ -503,7 +503,7 @@ class ScenarioSynthetizer:
         )
         print("list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)): ", list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)))
         print("np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)): ", np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)))
-        print("[d.month for d in datas] } : ", [d.month for d in datas] } )
+        print("[d.month for d in datas] } : ", [d.month for d in datas] )
 
         
         df_mlt = pd.DataFrame(data={"estagio": list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)),
