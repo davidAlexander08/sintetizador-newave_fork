@@ -1902,6 +1902,8 @@ class ScenarioSynthetizer:
     ) -> pd.DataFrame:
         # Descobre o valor em MLT
         df = df.copy()
+        print("synthesis.variable: ", synthesis.variable)
+        print("synthesis.spatial_resolution: ", synthesis.spatial_resolution)
         df_mlt = cls._get_cached_mlt(
             synthesis.variable,
             synthesis.spatial_resolution,
