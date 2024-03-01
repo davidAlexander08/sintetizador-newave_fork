@@ -495,6 +495,7 @@ class ScenarioSynthetizer:
             arq_engnat.series, pd.DataFrame, "séries de energia"
         )
         cfgs = configuracoes["valor"].to_numpy().flatten()[mes_inicio - 1 :]
+        cfgs = list( dict.fromkeys(cfgs) )
         print("cfgs: ", cfgs)
         print("configuracoes[valor].to_numpy().flatten(): ", configuracoes["valor"].to_numpy().flatten())
         datas = pd.date_range(
