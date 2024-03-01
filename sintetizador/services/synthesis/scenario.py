@@ -505,7 +505,7 @@ class ScenarioSynthetizer:
         df_mlt = pd.DataFrame(data={"estagio": list(range(-(12 + mes_inicio - 2), len(cfgs) + 1)),
                                     "configuracao": np.concatenate((np.array([1] * (12 + mes_inicio - 1)), cfgs)),
                                    "mes": [d.month for d in datas] } )
-        
+        print(df_mlt)
         dfs_mlt_rees = pd.DataFrame()
         # Para cada REE, obtem a série de MLT para os estágios do modelo
         ano_limite_historico = ano_inicio - 1
