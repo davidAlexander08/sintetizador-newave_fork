@@ -496,7 +496,7 @@ class ScenarioSynthetizer:
         )
         cfgs = configuracoes["valor"].to_numpy().flatten()[mes_inicio - 1 :]
         print("cfgs: ", cfgs)
-        print("configuracoes["valor"].to_numpy().flatten(): ", configuracoes["valor"].to_numpy().flatten())
+        print("configuracoes[valor].to_numpy().flatten(): ", configuracoes["valor"].to_numpy().flatten())
         datas = pd.date_range(
             datetime(year=ano_inicio - 1, month=1, day=1),
             #datetime(year=ano_inicio + anos_estudo + anos_pos_estudo - 1, month=12, day=1),
