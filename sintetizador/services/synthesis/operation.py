@@ -2151,10 +2151,13 @@ class OperationSynthetizer:
         print("ano_inicio: ", ano_inicio)
         print("mes_inicio: ", mes_inicio)
         starting_date = datetime(ano_inicio, mes_inicio, 1)
+        print("starting_date: ", starting_date)
         data_starting_date = df["dataInicio"].min().to_pydatetime()
+        print("data_starting_date: ", data_starting_date)
         month_difference = int(
             (starting_date - data_starting_date) / timedelta(days=30)
         )
+        print("month_difference: ", month_difference)
         return month_difference
 
     @classmethod
