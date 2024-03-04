@@ -2397,6 +2397,9 @@ class OperationSynthetizer:
                     if not is_stub:
                         df = cls._resolve_spatial_resolution(s, uow)
                         print("df: ", df)
+                        print("df: ", df.loc[df["estagio"] == 1])
+                        print("df: ", df.loc[df["estagio"] == 2])
+                        print("df: ", df.loc[df["estagio"] == 3])
                         cls.__store_in_cache_if_needed(s, df)
                 if df is not None:
                     if not df.empty:
