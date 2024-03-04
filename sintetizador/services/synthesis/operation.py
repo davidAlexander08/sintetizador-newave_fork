@@ -2413,7 +2413,7 @@ class OperationSynthetizer:
                     if not is_stub:
                         df = cls._resolve_spatial_resolution(s, uow)
                         print("df: ", df)
-                        print("df: ", df.loc[df["estagio"] == 1])
+                        #print("df: ", df.loc[df["estagio"] == 1])
                         #print("df: ", df.loc[df["estagio"] == 2])
                         #print("df: ", df.loc[df["estagio"] == 3])
                         cls.__store_in_cache_if_needed(s, df)
@@ -2423,7 +2423,7 @@ class OperationSynthetizer:
                         df = cls._resolve_starting_stage(df, uow)
                         print("RESOLVEU STARTING STAGE")
                         print("df: ", df)
-                        print("df: ", df.loc[df["estagio"] == 1])
+                        #print("df: ", df.loc[df["estagio"] == 1])
                         #print("df: ", df.loc[df["estagio"] == 2])
                         #print("df: ", df.loc[df["estagio"] == 3])
                         df = cls._postprocess(df)
