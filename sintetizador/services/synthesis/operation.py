@@ -2175,12 +2175,12 @@ class OperationSynthetizer:
         print("month_difference: ", month_difference)
         starting_df = df.copy()
         starting_df.loc[:, "estagio"] -= month_difference
-        print("starting_df: ", starting_df)
+        #print("starting_df: ", starting_df)
         # Considera somente estágios do período de estudo em diante
         starting_df = starting_df.loc[starting_df["estagio"] > 0]
-        print("starting_df 1: ", starting_df)
+        #print("starting_df 1: ", starting_df)
         starting_df = starting_df.rename(columns={"serie": "cenario"})
-        print("starting_df 2: ", starting_df)
+        #print("starting_df 2: ", starting_df)
         return starting_df.copy()
 
     @classmethod
