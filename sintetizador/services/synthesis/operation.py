@@ -2389,6 +2389,7 @@ class OperationSynthetizer:
                 found_synthesis = False
                 cls.logger.info(f"Realizando síntese de {filename}")
                 df = cls.__get_from_cache_if_exists(s)
+                print(df)
                 if df.empty:
                     df, is_stub = cls._resolve_stub(s, uow)
                     if not is_stub:
