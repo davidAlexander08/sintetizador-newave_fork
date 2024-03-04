@@ -2156,9 +2156,15 @@ class OperationSynthetizer:
         print("data_starting_date: ", data_starting_date)
         month_difference = int(
             (starting_date - data_starting_date) / timedelta(days=30)
-        )
+        )        
         print("starting_date - data_starting_date: " , starting_date - data_starting_date)
         print("month_difference: ", month_difference)
+
+        month_difference = starting_date.month - data_starting_date.month
+        print("month_difference: new ", month_difference)
+        print("starting_date.month: new", starting_date.month)
+        print("data_starting_date.month: new", data_starting_date.month)
+        
         return month_difference
 
     @classmethod
