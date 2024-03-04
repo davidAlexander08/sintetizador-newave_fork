@@ -2414,8 +2414,8 @@ class OperationSynthetizer:
                         df = cls._resolve_spatial_resolution(s, uow)
                         print("df: ", df)
                         print("df: ", df.loc[df["estagio"] == 1])
-                        print("df: ", df.loc[df["estagio"] == 2])
-                        print("df: ", df.loc[df["estagio"] == 3])
+                        #print("df: ", df.loc[df["estagio"] == 2])
+                        #print("df: ", df.loc[df["estagio"] == 3])
                         cls.__store_in_cache_if_needed(s, df)
                 if df is not None:
                     if not df.empty:
@@ -2424,8 +2424,8 @@ class OperationSynthetizer:
                         print("RESOLVEU STARTING STAGE")
                         print("df: ", df)
                         print("df: ", df.loc[df["estagio"] == 1])
-                        print("df: ", df.loc[df["estagio"] == 2])
-                        print("df: ", df.loc[df["estagio"] == 3])
+                        #print("df: ", df.loc[df["estagio"] == 2])
+                        #print("df: ", df.loc[df["estagio"] == 3])
                         df = cls._postprocess(df)
                         with uow:
                             uow.export.synthetize_df(df, filename)
