@@ -2392,6 +2392,8 @@ class OperationSynthetizer:
                 print(df)
                 if df.empty:
                     df, is_stub = cls._resolve_stub(s, uow)
+                    print("is_stub: ", is_stub)
+                    print("df: ", df)
                     if not is_stub:
                         df = cls._resolve_spatial_resolution(s, uow)
                         cls.__store_in_cache_if_needed(s, df)
