@@ -2160,11 +2160,15 @@ class OperationSynthetizer:
         cls, df: pd.DataFrame, uow: AbstractUnitOfWork
     ):
         month_difference = cls._offset_meses_inicio(df, uow)
+        print("month_difference: ", month_difference)
         starting_df = df.copy()
         starting_df.loc[:, "estagio"] -= month_difference
+        print("starting_df: ", starting_df)
         # Considera somente estágios do período de estudo em diante
         starting_df = starting_df.loc[starting_df["estagio"] > 0]
+        print("starting_df 1: ", starting_df)
         starting_df = starting_df.rename(columns={"serie": "cenario"})
+        print("starting_df 2: ", starting_df)
         return starting_df.copy()
 
     @classmethod
