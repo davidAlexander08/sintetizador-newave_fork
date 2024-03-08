@@ -1498,8 +1498,8 @@ class ScenarioSynthetizer:
         )
         #n_iters = convergencia["iteracao"].max()
         dger = cls._get_dger(uow)
-        #n_iters = dger.num_max_iteracoes
-        n_iters = 1
+        n_iters = dger.num_max_iteracoes
+        #n_iters = 1
         df_completo = pd.DataFrame()
         n_procs = int(Settings().processors)
         with Pool(processes=n_procs) as pool:
