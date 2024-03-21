@@ -1434,6 +1434,8 @@ class RawFilesRepository(AbstractFilesRepository):
                 month=mes_inicio,
                 day=1,
             )
+            print("ano_fim_hib: " , ano_fim_hib)
+            print("mes_fim_hib: " , mes_fim_hib)
             data_fim_individualizado = datetime(
                 year=int(ano_fim_hib),
                 month=int(mes_fim_hib),
