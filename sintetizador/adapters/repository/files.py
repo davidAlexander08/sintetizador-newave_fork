@@ -1427,8 +1427,9 @@ class RawFilesRepository(AbstractFilesRepository):
         rees = self._validate_data(arq_ree.rees, pd.DataFrame)
         mes_fim_hib = rees["mes_fim_individualizado"].iloc[0]
         ano_fim_hib = rees["ano_fim_individualizado"].iloc[0]
-
-        if mes_fim_hib is not None and ano_fim_hib is not None:
+        if ((type(mes_fim_hib) == int or type(mes_fim_hib) == float) and (type(ano_fim_hib) == int or type(ano_fim_hib) == float) ):
+            
+        #if (mes_fim_hib is not None and ano_fim_hib is not None):
             data_inicio_estudo = datetime(
                 year=ano_inicio,
                 month=mes_inicio,
